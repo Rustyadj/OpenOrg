@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Sun, ArrowRight, Shield, Building2, MessageSquare, Vote,
+  Circle, ArrowRight, Shield, Building2, MessageSquare, Vote,
   Bell, Plus, CheckSquare, AlertTriangle, User, Bot,
   ChevronRight, Clock,
 } from 'lucide-react';
@@ -101,10 +101,10 @@ export default function Dashboard({ onNav }: DashboardProps) {
   ].slice(0, 5);
 
   const PRIORITIES = [
-    { id: 'proposals', label: 'Review Votes',  sub: pendingVotes > 0 ? `${pendingVotes} pending` : 'No pending', icon: Vote,          color: 'var(--accent)' },
-    { id: 'security',  label: 'Security',       sub: '1 alert',                                                    icon: Shield,         color: 'var(--status-amber)' },
-    { id: 'org',       label: 'Organization',   sub: `${agents.length} members`,                                   icon: Building2,      color: 'var(--status-blue)' },
-    { id: 'chat',      label: 'AI Chat',        sub: 'Ask anything',                                               icon: MessageSquare,  color: 'var(--status-violet)' },
+    { id: 'proposals', label: 'Review Votes', sub: pendingVotes > 0 ? `${pendingVotes} pending` : 'No pending', icon: Vote },
+    { id: 'security', label: 'Security', sub: '1 alert', icon: Shield },
+    { id: 'org', label: 'Organization', sub: `${agents.length} members`, icon: Building2 },
+    { id: 'chat', label: 'AI Chat', sub: 'Ask anything', icon: MessageSquare },
   ];
 
   const ACTIVITY = [
@@ -141,7 +141,7 @@ export default function Dashboard({ onNav }: DashboardProps) {
 
         {/* Greeting */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Sun size={22} style={{ color: 'var(--status-amber)', flexShrink: 0 }} />
+          <Circle size={10} fill="var(--accent)" style={{ color: 'var(--accent)', flexShrink: 0 }} />
           <div>
             <h1 style={{ fontSize: 22, fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>
               {greeting}, Rusty
@@ -149,7 +149,7 @@ export default function Dashboard({ onNav }: DashboardProps) {
             <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: 0 }}>
               Here's what's happening in{' '}
               <span style={{ color: 'var(--accent-dark)', fontWeight: 500 }}>Avraxe AI</span>{' '}
-              today ↓
+              today.
             </p>
           </div>
         </div>
@@ -230,14 +230,15 @@ export default function Dashboard({ onNav }: DashboardProps) {
                     width: 32,
                     height: 32,
                     borderRadius: 8,
-                    background: `${p.color}18`,
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
                   }}
                 >
-                  <p.icon size={15} style={{ color: p.color }} />
+                  <p.icon size={15} style={{ color: 'var(--text-secondary)' }} />
                 </div>
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)' }}>{p.label}</div>

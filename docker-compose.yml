@@ -1,0 +1,85 @@
+version: '3.9'
+
+services:
+  openclaw-pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: openclaw-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: openclaw
+      POSTGRES_USER: openclaw
+      POSTGRES_PASSWORD: openclaw
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openclaw"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  openclaw-neo4j:
+    image: neo4j:5-community
+    container_name: openclaw-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/openclaw
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+
+  openclaw-redis:
+    image: redis:7-alpine
+    container_name: openclaw-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+
+  openclaw-memory-service:
+    build: ./backend
+    container_name: openclaw-memory-service
+    restart: unless-stopped
+    depends_on:
+      openclaw-pgvector:
+        condition: service_healthy
+      openclaw-neo4j:
+        condition: service_started
+      openclaw-redis:
+        condition: service_started
+    environment:
+      DATABASE_URL: postgresql://openclaw:openclaw@openclaw-pgvector:5432/openclaw
+      NEO4J_URI: bolt://openclaw-neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: openclaw
+      REDIS_URL: redis://openclaw-redis:6379
+      MEMORY_SERVICE_PORT: 4000
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      VOYAGE_API_KEY: ${VOYAGE_API_KEY:-}
+      AUTH_TOKEN: ${MEMORY_SERVICE_TOKEN:-openclaw-memory-secret}
+    ports:
+      - "4000:4000"
+
+  openclaw-frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:4000
+        VITE_ALLOW_DEMO_AUTH: "true"
+        VITE_APP_NAME: OpenOrg
+    container_name: openclaw-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - openclaw-memory-service
+
+volumes:
+  pgvector_data:
+  neo4j_data:
+  redis_data:

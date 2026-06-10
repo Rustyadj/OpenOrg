@@ -47,7 +47,7 @@ export default function BuilderTopBar({
   }
 
   return (
-    <div className="h-12 flex items-center bg-[#0F1419] border-b border-white/[0.07] px-4 gap-3 shrink-0 relative z-10">
+    <div className="relative z-10 flex h-12 shrink-0 items-center gap-3 border-b border-white/[0.065] bg-[#0D0E10] px-4">
       {/* Left */}
       <div className="flex items-center gap-3">
         <Link
@@ -68,12 +68,12 @@ export default function BuilderTopBar({
               onChange={e => setDraft(e.target.value)}
               onBlur={commitEdit}
               onKeyDown={e => { if (e.key === 'Enter') commitEdit(); if (e.key === 'Escape') setEditing(false) }}
-              className="bg-[#141920] border border-[#1DD68C]/50 rounded px-2 py-0.5 text-sm font-medium text-[#E8EDF2] outline-none w-44"
+              className="w-44 rounded border border-[#1DD68C]/40 bg-[#111214] px-2 py-0.5 text-sm font-medium text-[#F2F3F5] outline-none"
             />
           ) : (
             <span
               onClick={() => { setDraft(projectName); setEditing(true) }}
-              className="text-sm font-medium text-[#E8EDF2] cursor-pointer hover:text-white"
+              className="cursor-pointer text-sm font-medium text-[#F2F3F5] hover:text-white"
             >
               {projectName}
             </span>
@@ -112,7 +112,7 @@ export default function BuilderTopBar({
 
         <div className="w-px h-4 bg-white/[0.07] mx-1" />
 
-        <div className="flex items-center gap-0.5 bg-[#141920] rounded-lg p-0.5">
+        <div className="flex items-center gap-0.5 rounded-lg border border-white/[0.05] bg-[#111214] p-0.5">
           {DEVICES.map(({ id, icon: Icon, title }) => (
             <button
               key={id}
@@ -151,7 +151,7 @@ export default function BuilderTopBar({
             </button>
           </div>
           {publishOpen && (
-            <div className="absolute right-0 top-full mt-1 w-48 bg-[#141920] border border-white/[0.07] rounded-lg py-1 shadow-lg z-20">
+            <div className="absolute right-0 top-full z-20 mt-1 w-48 rounded-lg border border-white/[0.09] bg-[#17181B] py-1 shadow-xl">
               {['Publish to staging', 'Publish to production'].map(opt => (
                 <button
                   key={opt}

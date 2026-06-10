@@ -10,17 +10,16 @@ import type { DeviceMode } from './BuilderPage'
 
 interface TemplateCard {
   icon: LucideIcon
-  color: string
   title: string
   sub: string
 }
 
 const TEMPLATES: TemplateCard[] = [
-  { icon: MessageSquare,   color: '#1DD68C', title: 'AI Chat App',          sub: 'Conversational AI assistant' },
-  { icon: LayoutDashboard, color: '#3B82F6', title: 'Internal Dashboard',   sub: 'Admin & analytics' },
-  { icon: GitBranch,       color: '#A78BFA', title: 'Workflow Automation',  sub: 'Process & task automation' },
-  { icon: FileText,        color: '#F59E0B', title: 'Document Assistant',   sub: 'AI for document analysis' },
-  { icon: Wrench,          color: '#6B7785', title: 'Custom App',           sub: 'Start from scratch' },
+  { icon: MessageSquare, title: 'AI Chat App',         sub: 'Conversational AI assistant' },
+  { icon: LayoutDashboard, title: 'Internal Dashboard', sub: 'Admin and analytics' },
+  { icon: GitBranch, title: 'Workflow Automation',     sub: 'Process and task automation' },
+  { icon: FileText, title: 'Document Assistant',       sub: 'AI for document analysis' },
+  { icon: Wrench, title: 'Custom App',                  sub: 'Start from scratch' },
 ]
 
 interface Props {
@@ -52,7 +51,7 @@ export default function Canvas({
   return (
     <div
       className="flex-1 overflow-auto relative"
-      style={{ background: '#0B0F14' }}
+      style={{ background: '#090A0B' }}
       onClick={() => setSelectedElement(null)}
     >
       {/* Dot grid */}
@@ -69,7 +68,7 @@ export default function Canvas({
         <button
           onClick={e => { e.stopPropagation(); setComponentPanelOpen(true) }}
           title="Open component panel"
-          className="absolute top-3 left-3 z-10 p-1.5 rounded-lg bg-[#0F1419] border border-white/[0.07] text-[#6B7785] hover:text-[#E8EDF2] hover:border-white/20 transition-colors"
+          className="absolute left-3 top-3 z-10 rounded-lg border border-white/[0.07] bg-[#111214] p-1.5 text-[#71767E] transition-colors hover:border-white/20 hover:text-[#F2F3F5]"
         >
           <PanelLeft size={15} />
         </button>
@@ -126,7 +125,7 @@ function EmptyState({
       </p>
 
       {/* Prompt card */}
-      <div className="w-full max-w-[600px] bg-[#0F1419] border border-white/[0.09] rounded-xl p-4 mb-8">
+      <div className="mb-10 w-full max-w-[620px] rounded-2xl border border-white/[0.09] bg-[#111214]/95 p-4 shadow-[0_16px_50px_rgba(0,0,0,0.22)]">
         <textarea
           ref={textareaRef}
           value={prompt}
@@ -134,7 +133,7 @@ function EmptyState({
           onKeyDown={e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) onGenerate() }}
           placeholder="Describe the app or website you want to build…"
           rows={3}
-          className="w-full bg-transparent text-sm text-[#E8EDF2] placeholder-[#6B7785] resize-none outline-none leading-relaxed"
+          className="w-full resize-none bg-transparent text-sm leading-relaxed text-[#F2F3F5] outline-none placeholder-[#71767E]"
         />
         <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/[0.07]">
           <button title="Attach file" className="p-1.5 rounded-md text-[#6B7785] hover:text-[#E8EDF2] hover:bg-white/5 transition-colors">
@@ -180,13 +179,10 @@ function TemplateCardUI({ card, onClick }: { card: TemplateCard; onClick: () => 
   return (
     <button
       onClick={onClick}
-      className="w-[136px] bg-[#141920] border border-white/[0.07] hover:border-[#1DD68C]/30 rounded-xl p-4 text-left transition-all hover:bg-[#0F1419] cursor-pointer group"
+      className="w-[136px] rounded-xl border border-white/[0.07] bg-[#111214] p-4 text-left shadow-[0_8px_24px_rgba(0,0,0,0.14)] transition-all hover:border-white/[0.13] hover:bg-[#17181b] cursor-pointer group"
     >
-      <div
-        className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
-        style={{ background: card.color + '22' }}
-      >
-        <Icon size={17} style={{ color: card.color }} />
+      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.07] bg-white/[0.035]">
+        <Icon size={17} className="text-[#A1A5AB] transition-colors group-hover:text-[#F2F3F5]" />
       </div>
       <p className="text-sm font-medium text-[#E8EDF2] leading-tight">{card.title}</p>
       <p className="text-[11px] text-[#6B7785] mt-1 leading-snug">{card.sub}</p>

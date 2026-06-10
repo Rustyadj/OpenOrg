@@ -1,5 +1,5 @@
-import { StubPage } from './StubPage'
+import Dashboard from '../components/dashboard/Dashboard'
 
 export function Home() {
-  return <StubPage title="Home" subtitle="Command dashboard coming soon" />
+  return <Dashboard onNav={() => {}} />
 }

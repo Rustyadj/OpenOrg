@@ -1,18 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --canvas: #090a0b;
+  --surface: #111214;
+  --surface-sub: #0d0e10;
+  --surface-raise: #17181b;
+  --surface-hover: #1c1e21;
+  --surface-inset: #090a0b;
+  --border: rgba(255, 255, 255, 0.065);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-focus: rgba(29, 214, 140, 0.42);
+  --sidebar-bg: #0d0e10;
+  --accent: #1dd68c;
+  --accent-soft: rgba(29, 214, 140, 0.09);
+  --accent-mid: rgba(29, 214, 140, 0.2);
+  --accent-glow: transparent;
+  --accent-dark: #45dfa2;
+  --text-primary: #f2f3f5;
+  --text-secondary: #a1a5ab;
+  --text-muted: #71767e;
+  --text-subtle: #51565d;
+  --text-accent: #45dfa2;
+  --status-green: #1dd68c;
+  --status-amber: #a1a5ab;
+  --status-red: #c7c9cd;
+  --status-blue: #a1a5ab;
+  --status-violet: #a1a5ab;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.32);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.42);
+}
 
 body {
   margin: 0;
-  background: #0B0F14;
-  color: #E8EDF2;
-  font-family: system-ui, sans-serif;
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: #2a313b #0F1419;
+  scrollbar-color: #2b2d31 transparent;
 }
 
 .sidebar-tooltip {
@@ -20,8 +48,8 @@ body {
   left: calc(100% + 10px);
   top: 50%;
   transform: translateY(-50%);
-  background: #1a2030;
-  color: #E8EDF2;
+  background: #1b1c1f;
+  color: var(--text-primary);
   font-size: 12px;
   padding: 4px 10px;
   border-radius: 6px;
@@ -29,10 +57,54 @@ body {
   pointer-events: none;
   opacity: 0;
   transition: opacity 120ms ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-hover);
+  box-shadow: var(--shadow);
   z-index: 100;
 }
 
 .sidebar-nav-item:hover .sidebar-tooltip {
   opacity: 1;
+}
+
+.glass-card,
+.panel {
+  background: rgba(18, 19, 21, 0.94);
+  border-color: var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.glass-card:hover,
+.panel:hover {
+  border-color: var(--border-hover);
+}
+
+.accent-glow {
+  box-shadow: none;
+}
+
+.tag-blue,
+.tag-violet,
+.tag-amber,
+.tag-red,
+.tag-gray,
+.tag-muted {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.metric-card,
+.team-card,
+.integration-card {
+  box-shadow: none;
+}
+
+.metric-card svg,
+.team-card svg,
+.integration-card svg {
+  filter: none;
+}
+
+button {
+  letter-spacing: -0.005em;
 }

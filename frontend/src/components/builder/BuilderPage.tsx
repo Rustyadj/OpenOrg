@@ -19,7 +19,7 @@ export default function BuilderPage() {
   const [activeTab, setActiveTab] = useState<BuilderTab>('builder')
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden bg-[#0B0F14]">
+    <div className="flex flex-1 flex-col overflow-hidden bg-[#090A0B]">
       <BuilderTopBar
         projectName={projectName}
         setProjectName={setProjectName}

@@ -1,10 +1,5 @@
-import { StubPage } from './StubPage'
+import IntegrationsComponent from '../components/integrations/Integrations'
 
 export function Integrations() {
-  return (
-    <StubPage
-      title="Integrations"
-      subtitle="Connected apps and services"
-    />
-  )
+  return <IntegrationsComponent />
 }

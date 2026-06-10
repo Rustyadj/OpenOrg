@@ -1,7 +1,5 @@
-import { StubPage } from './StubPage'
+import OrganizationComponent from '../components/org/Organization'
 
 export function Organization() {
-  return (
-    <StubPage title="Organization" subtitle="Org chart and team structure" />
-  )
+  return <OrganizationComponent />
 }

@@ -11,29 +11,17 @@ interface ProjectsProps {
 const STATUS_COLORS: Record<Project['status'], string> = {
   active:   'rgba(16,185,129,0.12)',
   backlog:  'rgba(255,255,255,0.06)',
-  review:   'rgba(245,158,11,0.12)',
-  done:     'rgba(59,130,246,0.12)',
+  review:   'rgba(255,255,255,0.06)',
+  done:     'rgba(255,255,255,0.06)',
   archived: 'rgba(255,255,255,0.04)',
 };
 const STATUS_TEXT: Record<Project['status'], string> = {
   active:   '#6ee7b7',
   backlog:  '#9ca3af',
-  review:   '#fcd34d',
-  done:     '#93c5fd',
+  review:   '#9ca3af',
+  done:     '#c7c9cd',
   archived: '#6b7280',
 };
-
-const FOLDER_GRADIENTS = [
-  'linear-gradient(135deg,#00E6A8,#3b82f6)',
-  'linear-gradient(135deg,#f59e0b,#f97316)',
-  'linear-gradient(135deg,#8b5cf6,#ec4899)',
-  'linear-gradient(135deg,#06b6d4,#3b82f6)',
-  'linear-gradient(135deg,#10b981,#14b8a6)',
-];
-
-function gradientFor(idx: number) {
-  return FOLDER_GRADIENTS[idx % FOLDER_GRADIENTS.length];
-}
 
 function relativeDate(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
@@ -134,10 +122,11 @@ export default function Projects({ onOpenProject }: ProjectsProps) {
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 14 }}>
                 <div style={{
                   width: 38, height: 38, borderRadius: 10, flexShrink: 0,
-                  background: gradientFor(idx),
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid var(--border)',
                   display: 'grid', placeItems: 'center',
                 }}>
-                  <Folder size={17} strokeWidth={1.8} color="rgba(255,255,255,0.9)" />
+                  <Folder size={17} strokeWidth={1.8} color="var(--text-secondary)" />
                 </div>
                 <span style={{
                   fontSize: 10.5, fontWeight: 600, padding: '3px 8px', borderRadius: 99,

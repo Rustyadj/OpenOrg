@@ -1,10 +1,5 @@
-import { StubPage } from './StubPage'
+import { WorkflowsEnhanced } from '../components/workflows/WorkflowsEnhanced'
 
 export function Workflows() {
-  return (
-    <StubPage
-      title="Workflows"
-      subtitle="Automation and workflow builder"
-    />
-  )
+  return <WorkflowsEnhanced />
 }

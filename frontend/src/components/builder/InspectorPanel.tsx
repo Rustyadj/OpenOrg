@@ -28,7 +28,7 @@ export default function InspectorPanel({ open, onClose, selectedElement, project
 
   return (
     <div
-      className={`flex flex-col bg-[#0F1419] border-l border-white/[0.07] transition-all duration-200 overflow-hidden shrink-0 ${
+      className={`flex shrink-0 flex-col overflow-hidden border-l border-white/[0.065] bg-[#0D0E10] transition-all duration-200 ${
         open ? 'w-[260px]' : 'w-0'
       }`}
     >
@@ -192,12 +192,12 @@ export default function InspectorPanel({ open, onClose, selectedElement, project
       <style>{`
         .inspector-input {
           flex: 1;
-          background: #141920;
+          background: #111214;
           border: 1px solid rgba(255,255,255,0.07);
           border-radius: 6px;
           padding: 3px 8px;
           font-size: 11px;
-          color: #E8EDF2;
+          color: #F2F3F5;
           outline: none;
           transition: border-color 120ms;
           min-width: 0;

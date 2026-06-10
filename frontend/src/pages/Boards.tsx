@@ -1,5 +1,5 @@
-import { StubPage } from './StubPage'
+import Board from '../components/board/Board'
 
 export function Boards() {
-  return <StubPage title="Boards" subtitle="Kanban and task boards" />
+  return <Board />
 }

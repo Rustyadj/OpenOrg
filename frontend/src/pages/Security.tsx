@@ -1,10 +1,5 @@
-import { StubPage } from './StubPage'
+import SecurityCenter from '../components/security/SecurityCenter'
 
 export function Security() {
-  return (
-    <StubPage
-      title="Security"
-      subtitle="Red team, blue team, and audit tools"
-    />
-  )
+  return <SecurityCenter onNav={() => {}} />
 }

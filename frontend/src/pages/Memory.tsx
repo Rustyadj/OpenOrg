@@ -1,5 +1,5 @@
-import { StubPage } from './StubPage'
+import { MemoryVaultEnhanced } from '../components/memory/MemoryVaultEnhanced'
 
 export function Memory() {
-  return <StubPage title="Memory" subtitle="Context and memory management" />
+  return <MemoryVaultEnhanced />
 }

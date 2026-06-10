@@ -1,10 +1,5 @@
-import { StubPage } from './StubPage'
+import Marketplace from '../components/marketplace/Marketplace'
 
 export function Templates() {
-  return (
-    <StubPage
-      title="Templates"
-      subtitle="Start from a pre-built template"
-    />
-  )
+  return <Marketplace />
 }

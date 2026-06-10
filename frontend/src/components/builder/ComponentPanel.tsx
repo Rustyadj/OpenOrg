@@ -89,7 +89,7 @@ export default function ComponentPanel({ open, onClose }: Props) {
 
   return (
     <div
-      className={`flex flex-col bg-[#0F1419] border-r border-white/[0.07] transition-all duration-200 overflow-hidden shrink-0 ${
+      className={`flex shrink-0 flex-col overflow-hidden border-r border-white/[0.065] bg-[#0D0E10] transition-all duration-200 ${
         open ? 'w-[240px]' : 'w-0'
       }`}
     >
@@ -115,7 +115,7 @@ export default function ComponentPanel({ open, onClose }: Props) {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search components..."
-            className="w-full h-8 bg-[#141920] border border-white/[0.07] rounded-md pl-7 pr-3 text-xs text-[#E8EDF2] placeholder-[#6B7785] outline-none focus:border-[#1DD68C]/40 transition-colors"
+            className="h-8 w-full rounded-md border border-white/[0.07] bg-[#111214] pl-7 pr-3 text-xs text-[#F2F3F5] placeholder-[#71767E] outline-none transition-colors focus:border-[#1DD68C]/40"
           />
         </div>
       </div>

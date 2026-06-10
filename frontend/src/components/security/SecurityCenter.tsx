@@ -9,15 +9,15 @@ interface SecurityCenterProps {
 }
 
 const METRICS = [
-  { label:'Security Score', value:'92', suffix:'/100', sub:'↑ 4 pts from last week', icon:ShieldCheck, points:[26,17,22,12,20,13,12], color:'#10b981' },
-  { label:'Active Alerts', value:'3', sub:'2 Critical  •  1 High', icon:AlertTriangle, points:[12,16,17,23,14,12,24], color:'#ef4444' },
-  { label:'Open Investigations', value:'5', sub:'2 Critical  •  3 High', icon:Search, points:[22,18,25,11,10,24,13], color:'#f97316' },
-  { label:'Systems Monitored', value:'48', sub:'All systems operational', icon:Monitor, points:[12,17,18,24,18,21,14], color:'#60a5fa' },
+  { label:'Security Score', value:'92', suffix:'/100', sub:'Up 4 pts from last week', icon:ShieldCheck, points:[26,17,22,12,20,13,12], color:'var(--accent)' },
+  { label:'Active Alerts', value:'3', sub:'2 critical, 1 high', icon:AlertTriangle, points:[12,16,17,23,14,12,24], color:'var(--text-secondary)' },
+  { label:'Open Investigations', value:'5', sub:'2 critical, 3 high', icon:Search, points:[22,18,25,11,10,24,13], color:'var(--text-secondary)' },
+  { label:'Systems Monitored', value:'48', sub:'All systems operational', icon:Monitor, points:[12,17,18,24,18,21,14], color:'var(--text-secondary)' },
 ];
 const TEAMS = [
-  { name:'Red Team', subtitle:'Offensive Security', color:'#ef4444', icon:Shield, description:'Simulate attacks and identify weaknesses before adversaries can exploit them.', tasks:4, findings:7, extra:2 },
-  { name:'Blue Team', subtitle:'Defensive Security', color:'#3b82f6', icon:ShieldCheck, description:'Monitor systems, detect threats, and respond to security incidents.', tasks:6, findings:12, extra:3 },
-  { name:'Purple Team', subtitle:'Collaborative Security', color:'#8b5cf6', icon:Layers, description:'Bridge offensive and defensive insights to improve overall security posture.', tasks:3, findings:5, extra:2 },
+  { name:'Red Team', subtitle:'Offensive Security', color:'var(--text-secondary)', icon:Shield, description:'Simulate attacks and identify weaknesses before adversaries can exploit them.', tasks:4, findings:7, extra:2 },
+  { name:'Blue Team', subtitle:'Defensive Security', color:'var(--text-secondary)', icon:ShieldCheck, description:'Monitor systems, detect threats, and respond to security incidents.', tasks:6, findings:12, extra:3 },
+  { name:'Purple Team', subtitle:'Collaborative Security', color:'var(--text-secondary)', icon:Layers, description:'Bridge offensive and defensive insights to improve overall security posture.', tasks:3, findings:5, extra:2 },
 ];
 const THREATS = [
   { sev:'Critical', title:'Possible credential stuffing attack', source:'Auth System', status:'Investigating', date:'May 20, 10:24 AM' },

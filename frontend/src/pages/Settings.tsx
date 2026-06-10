@@ -1,7 +1,5 @@
-import { StubPage } from './StubPage'
+import SettingsComponent from '../components/settings/Settings'
 
 export function Settings() {
-  return (
-    <StubPage title="Settings" subtitle="Account and workspace settings" />
-  )
+  return <SettingsComponent />
 }

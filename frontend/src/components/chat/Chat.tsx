@@ -284,12 +284,10 @@ function AvaiLogo() {
 function AvaiHexLogo() {
   return (
     <div style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', inset: '-18px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
       <svg width="72" height="82" viewBox="0 0 72 82" fill="none">
-        <polygon points="36,2 70,20 70,62 36,80 2,62 2,20" stroke="#10b981" strokeWidth="2" fill="rgba(16,185,129,0.04)" />
-        <polygon points="36,14 58,26 58,54 36,66 14,54 14,26" stroke="#10b981" strokeWidth="1.5" fill="none" opacity="0.45" />
-        <polygon points="36,24 50,32 50,50 36,58 22,50 22,32" stroke="#10b981" strokeWidth="1" fill="none" opacity="0.25" />
-        <path d="M27 31 L36 53 L45 31" stroke="#10b981" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <polygon points="36,2 70,20 70,62 36,80 2,62 2,20" stroke="#a1a5ab" strokeWidth="1.5" fill="rgba(255,255,255,0.02)" />
+        <polygon points="36,14 58,26 58,54 36,66 14,54 14,26" stroke="#71767e" strokeWidth="1.2" fill="none" opacity="0.7" />
+        <path d="M27 31 L36 53 L45 31" stroke="#f2f3f5" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       </svg>
     </div>
   );
