@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #0B0F14;
+  color: #E8EDF2;
+  font-family: system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #2a313b #0F1419;
+}
+
+.sidebar-tooltip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1a2030;
+  color: #E8EDF2;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 100;
+}
+
+.sidebar-nav-item:hover .sidebar-tooltip {
+  opacity: 1;
+}

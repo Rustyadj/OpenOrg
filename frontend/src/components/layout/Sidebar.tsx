@@ -1,121 +1,145 @@
-import React, { useState } from 'react';
 import {
-  Bot, Brain, Building2, CheckSquare, ExternalLink, FileText, GitBranch, Home, LayoutGrid,
-  MessageSquare, PanelLeftClose, PanelLeftOpen, Plug, Settings, Shield,
-} from 'lucide-react';
+  Brain,
+  Building2,
+  ChevronLeft,
+  ChevronRight,
+  FolderOpen,
+  GitBranch,
+  Home,
+  Kanban,
+  Layers,
+  LayoutTemplate,
+  MessageSquare,
+  Plug,
+  Settings,
+  Shield,
+  type LucideIcon,
+} from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 interface SidebarProps {
-  active: string;
-  onNav: (id: string) => void;
-  currentUserName: string;
-  defaultCollapsed?: boolean;
+  expanded: boolean
+  onToggle: () => void
 }
 
-const NAV = [
-  { id: 'home',         label: 'Home',         icon: Home },
-  { id: 'chat',         label: 'AI Chat',      icon: MessageSquare },
-  { id: 'org',          label: 'Organization', icon: Building2 },
-  { id: 'proposals',    label: 'Proposals',    icon: FileText },
-  { id: 'board',        label: 'Boards',       icon: LayoutGrid },
-  { id: 'tasks',        label: 'Tasks',        icon: CheckSquare },
-  { id: 'workflows',    label: 'Workflows',    icon: GitBranch },
-  { id: 'agents',       label: 'Agents',       icon: Bot },
-  { id: 'security',     label: 'Security',     icon: Shield },
-  { id: 'memory',       label: 'Memory',       icon: Brain },
-  { id: 'integrations', label: 'Integrations', icon: Plug },
-  { id: 'settings',     label: 'Settings',     icon: Settings },
-];
+interface NavItem {
+  icon: LucideIcon
+  label: string
+  path: string
+}
 
-const ORG_NAV = [
-  ['chart', 'Org Chart'], ['people', 'People'], ['departments', 'Departments'], ['teams', 'Teams'],
-  ['invitations', 'Invitations'], ['permissions', 'Roles & Permissions'], ['governance', 'Governance'],
-] as const;
+const primaryNavItems: NavItem[] = [
+  { icon: Home, label: 'Home', path: '/' },
+  { icon: MessageSquare, label: 'AI Chat', path: '/chat' },
+  { icon: Layers, label: 'Builder', path: '/builder' },
+  { icon: FolderOpen, label: 'Projects', path: '/projects' },
+  { icon: LayoutTemplate, label: 'Templates', path: '/templates' },
+  { icon: Building2, label: 'Organization', path: '/organization' },
+  { icon: Kanban, label: 'Boards', path: '/boards' },
+  { icon: GitBranch, label: 'Workflows', path: '/workflows' },
+  { icon: Shield, label: 'Security', path: '/security' },
+  { icon: Brain, label: 'Memory', path: '/memory' },
+  { icon: Plug, label: 'Integrations', path: '/integrations' },
+]
 
-export default function Sidebar({ active, onNav, currentUserName, defaultCollapsed = false }: SidebarProps) {
-  const [collapsed, setCollapsed] = useState(defaultCollapsed);
-  const [organizationTab, setOrganizationTab] = useState('chart');
-  const initials = currentUserName.split(' ').map(part => part[0]).join('').slice(0, 2).toUpperCase();
+const secondaryNavItems: NavItem[] = [
+  { icon: Settings, label: 'Settings', path: '/settings' },
+]
 
-  React.useEffect(() => {
-    const onTab = (event: Event) => setOrganizationTab((event as CustomEvent<string>).detail);
-    window.addEventListener('avai:organization-tab', onTab);
-    return () => window.removeEventListener('avai:organization-tab', onTab);
-  }, []);
+const baseNavClass =
+  'sidebar-nav-item relative mx-2 flex items-center gap-3 rounded-lg px-3 py-2 text-avai-muted transition-colors hover:bg-white/5 hover:text-avai-text'
+
+function NavigationItem({
+  item,
+  expanded,
+}: {
+  item: NavItem
+  expanded: boolean
+}) {
+  const Icon = item.icon
 
   return (
-    <aside className={`main-sidebar ${collapsed ? 'is-collapsed' : ''}`}>
-      <div className="brand-row">
-        <div className="brand-mark">O</div>
-        {!collapsed && (
-          <div className="brand-copy">
-            <strong>OpenClaw</strong>
-            <span>Command Center</span>
-          </div>
-        )}
-        <button
-          className="icon-button collapse-button"
-          onClick={() => setCollapsed(v => !v)}
-          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          {collapsed ? <PanelLeftOpen size={15} /> : <PanelLeftClose size={15} />}
-        </button>
-      </div>
+    <NavLink
+      to={item.path}
+      end={item.path === '/'}
+      aria-label={item.label}
+      className={({ isActive }) =>
+        `${baseNavClass}${
+          isActive
+            ? ' border-l-2 border-avai-accent bg-avai-accent/10 text-avai-accent'
+            : ''
+        }`
+      }
+    >
+      <Icon size={18} className="shrink-0" />
+      {expanded ? (
+        <span className="truncate text-sm">{item.label}</span>
+      ) : (
+        <span className="sidebar-tooltip">{item.label}</span>
+      )}
+    </NavLink>
+  )
+}
 
-      <nav className="main-nav">
-        {NAV.map(item => {
-          const Icon = item.icon;
-          return (
+export function Sidebar({ expanded, onToggle }: SidebarProps) {
+  return (
+    <aside
+      className={`flex h-screen shrink-0 flex-col border-r border-avai-border bg-avai-surface transition-all duration-200 ${
+        expanded ? 'w-[220px]' : 'w-14'
+      }`}
+    >
+      <div className="flex h-12 shrink-0 items-center px-3">
+        {expanded ? (
+          <>
+            <span className="text-lg font-semibold text-avai-accent">AVAI</span>
             <button
-              key={item.id}
-              className={`main-nav-item ${active === item.id ? 'is-active' : ''}`}
-              onClick={() => onNav(item.id)}
-              title={collapsed ? item.label : undefined}
+              type="button"
+              onClick={onToggle}
+              aria-label="Collapse sidebar"
+              className="ml-auto rounded p-1 text-avai-muted transition-colors hover:bg-white/5 hover:text-avai-text"
             >
-              <Icon size={16} strokeWidth={1.8} />
-              {!collapsed && <span>{item.label}</span>}
+              <ChevronLeft size={18} />
             </button>
-          );
-        })}
-        {active === 'org' && !collapsed && (
-          <div className="organization-subnav" aria-label="Organization sections">
-            <span>Organization</span>
-            {ORG_NAV.map(([id, label], index) => (
-              <button
-                key={label}
-                className={organizationTab === id ? 'is-active' : ''}
-                onClick={() => {
-                  onNav('org');
-                  window.dispatchEvent(new CustomEvent('avai:organization-tab', { detail: id }));
-                }}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
-
-      <a
-        href="https://cash.srv1427612.hstgr.cloud"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="main-nav-item"
-        title="Open Cash Agent"
-        style={{ textDecoration: 'none' }}
-      >
-        <ExternalLink size={16} strokeWidth={1.8} />
-        {!collapsed && <span>Cash Agent</span>}
-      </a>
-
-      <button className="sidebar-user" onClick={() => onNav('settings')}>
-        <span className="user-avatar">{initials || 'RK'}</span>
-        {!collapsed && (
-          <span className="user-copy">
-            <strong>{currentUserName}</strong>
-            <small>Administrator</small>
+          </>
+        ) : (
+          <span className="flex h-5 w-5 items-center justify-center rounded bg-avai-accent text-xs font-bold text-avai-bg">
+            A
           </span>
         )}
-      </button>
+      </div>
+
+      {!expanded && (
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label="Expand sidebar"
+          className="mx-auto mb-1 rounded p-1 text-avai-muted transition-colors hover:bg-white/5 hover:text-avai-text"
+        >
+          <ChevronRight size={18} />
+        </button>
+      )}
+
+      <nav className="flex-1 overflow-y-auto py-2">
+        {primaryNavItems.map((item) => (
+          <NavigationItem key={item.path} item={item} expanded={expanded} />
+        ))}
+        <hr className="my-2 border-avai-border" />
+        {secondaryNavItems.map((item) => (
+          <NavigationItem key={item.path} item={item} expanded={expanded} />
+        ))}
+      </nav>
+
+      <div className="mt-auto flex items-center gap-3 border-t border-avai-border p-3">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1DD68C22] text-sm font-medium text-avai-accent">
+          RK
+        </div>
+        {expanded && (
+          <div className="min-w-0">
+            <p className="truncate text-xs text-avai-text">Rusty Khan</p>
+            <p className="truncate text-xs text-avai-muted">Administrator</p>
+          </div>
+        )}
+      </div>
     </aside>
-  );
+  )
 }

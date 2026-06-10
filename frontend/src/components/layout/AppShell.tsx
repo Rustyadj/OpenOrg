@@ -1,23 +1,30 @@
-import React from 'react';
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { Sidebar } from './Sidebar'
 
-interface AppShellProps {
-  sidebar: React.ReactNode;
-  topBar?: React.ReactNode;
-  children: React.ReactNode;
-  rightPanel?: React.ReactNode;
+const SIDEBAR_STORAGE_KEY = 'avai_sidebar_expanded'
+
+function getInitialSidebarState(): boolean {
+  return localStorage.getItem(SIDEBAR_STORAGE_KEY) === 'true'
 }
 
-export default function AppShell({ sidebar, topBar, children, rightPanel }: AppShellProps) {
+export function AppShell() {
+  const [expanded, setExpanded] = useState<boolean>(getInitialSidebarState)
+
+  const toggle = () => {
+    setExpanded((current) => {
+      const next = !current
+      localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next))
+      return next
+    })
+  }
+
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'var(--canvas)' }}>
-      {sidebar}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0, background: 'var(--canvas)' }}>
-        {topBar}
-        <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          {children}
-        </main>
-      </div>
-      {rightPanel}
+    <div className="flex h-screen bg-avai-bg">
+      <Sidebar expanded={expanded} onToggle={toggle} />
+      <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <Outlet />
+      </main>
     </div>
-  );
+  )
 }
