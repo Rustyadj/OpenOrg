@@ -380,7 +380,7 @@ function OrgProfileView({ org, onBack }: { org: MarketplaceOrg; onBack: () => vo
               {[
                 { label: 'Human Ops', value: org.humans,   color: theme.textSecond },
                 { label: 'AI Agents', value: org.aiAgents, color: theme.accent      },
-                { label: 'Models',    value: org.models.length, color: '#8b5cf6'   },
+                { label: 'Models',    value: org.models.length, color: theme.textSecond },
               ].map(stat => (
                 <div key={stat.label} style={{ padding: '12px 14px', borderRadius: 10, background: theme.surfaceRaise, border: `1px solid ${theme.border}`, textAlign: 'center' }}>
                   <div style={{ fontSize: 22, fontWeight: 900, color: stat.color }}>{stat.value}</div>
@@ -662,7 +662,7 @@ export default function Marketplace() {
                 padding: '13px 14px',
                 fontSize: 13,
                 fontWeight: 650,
-                boxShadow: searchFocused ? '0 0 0 3px rgba(0,230,168,0.16)' : 'none',
+                boxShadow: searchFocused ? '0 0 0 2px rgba(255,255,255,0.07)' : 'none',
               }}
             />
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
