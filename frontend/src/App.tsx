@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
+import BuilderPage from './components/builder/BuilderPage'
 import { Boards } from './pages/Boards'
 import { Chat } from './pages/Chat'
 import { Home } from './pages/Home'
@@ -18,14 +19,7 @@ function App() {
       <Route element={<AppShell />}>
         <Route index element={<Home />} />
         <Route path="chat" element={<Chat />} />
-        <Route
-          path="builder"
-          element={
-            <div className="flex flex-1 items-center justify-center text-avai-text">
-              Builder coming in Part 2
-            </div>
-          }
-        />
+        <Route path="builder" element={<BuilderPage />} />
         <Route path="projects" element={<Projects />} />
         <Route path="templates" element={<Templates />} />
         <Route path="organization" element={<Organization />} />
