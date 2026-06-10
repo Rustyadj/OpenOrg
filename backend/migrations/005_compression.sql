@@ -1,0 +1,4 @@
+ALTER TABLE memories ADD COLUMN IF NOT EXISTS compressed BOOLEAN DEFAULT FALSE;
+ALTER TABLE memories ADD COLUMN IF NOT EXISTS original_token_count INT;
+ALTER TABLE memories ADD COLUMN IF NOT EXISTS compressed_token_count INT;
+ALTER TABLE memories ADD COLUMN IF NOT EXISTS compression_ratio FLOAT;
