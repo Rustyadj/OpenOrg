@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { ComponentType } from 'react'
 import {
   Search, ChevronDown, ChevronRight, GripVertical,
   LayoutTemplate, Grid2X2, Layers2, Square, Minus, AlignJustify,
@@ -7,9 +6,10 @@ import {
   Table2, List, BarChart2, Activity, FileText,
   Bot, MessageSquareDashed, Brain, Wrench, X
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 interface ComponentItem {
-  icon: ComponentType<{ size?: number; className?: string }>
+  icon: LucideIcon
   label: string
 }
 

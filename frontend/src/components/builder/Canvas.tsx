@@ -1,14 +1,15 @@
 import { useRef, useState } from 'react'
-import type { ComponentType, RefObject } from 'react'
+import type { RefObject } from 'react'
 import {
   Paperclip, Sparkles, Plus, ArrowUp,
   MessageSquare, LayoutDashboard, GitBranch, FileText, Wrench,
   PanelLeft
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import type { DeviceMode } from './BuilderPage'
 
 interface TemplateCard {
-  icon: ComponentType<{ size?: number; className?: string }>
+  icon: LucideIcon
   color: string
   title: string
   sub: string

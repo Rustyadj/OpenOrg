@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src/App.tsx src/main.tsx src/components/layout/AppShell.tsx src/components/layout/Sidebar.tsx src/pages --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint src/App.tsx src/main.tsx src/components/layout/AppShell.tsx src/components/layout/Sidebar.tsx src/components/builder src/pages --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
