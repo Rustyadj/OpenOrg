@@ -1,0 +1,81 @@
+version: '3.9'
+
+services:
+  hermes-lisa:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: hermes-lisa
+    restart: unless-stopped
+    environment:
+      # Identity
+      WEBUI_NAME: "Lisa"
+      WEBUI_URL: https://hermes.srv1427612.hstgr.cloud
+
+      # Claude via OpenAI-compat proxy
+      OPENAI_API_BASE_URL: https://api.anthropic.com/v1
+      OPENAI_API_KEY: ${ANTHROPIC_API_KEY}
+      DEFAULT_MODELS: claude-sonnet-4-6
+
+      # Auth
+      WEBUI_SECRET_KEY: ${HERMES_SECRET_KEY}
+      WEBUI_AUTH: "true"
+
+      # Persistent memory backend (connects to openclaw memory service)
+      ENABLE_MEMORY: "true"
+      MEMORY_API_URL: http://openclaw-memory-service:4000
+      MEMORY_API_KEY: ${MEMORY_SERVICE_TOKEN}
+
+      # Composio
+      COMPOSIO_API_KEY: ${COMPOSIO_API_KEY:-}
+
+      # Disable telemetry
+      SCARF_NO_ANALYTICS: "true"
+      DO_NOT_TRACK: "true"
+    volumes:
+      - hermes_data:/app/backend/data
+      - ./lisa/agent.json:/app/backend/data/agents/lisa.json:ro
+      - ./lisa/skills:/app/backend/data/skills:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - openorg
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hermes.rule=Host(`hermes.srv1427612.hstgr.cloud`)"
+      - "traefik.http.routers.hermes.entrypoints=websecure"
+      - "traefik.http.routers.hermes.tls.certresolver=letsencrypt"
+      - "traefik.http.services.hermes.loadbalancer.server.port=8080"
+
+  hermes-dashboard:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: hermes-dashboard
+    restart: unless-stopped
+    environment:
+      WEBUI_NAME: "Hermes Dashboard"
+      WEBUI_URL: https://hermes-dash.srv1427612.hstgr.cloud
+      OPENAI_API_BASE_URL: https://api.anthropic.com/v1
+      OPENAI_API_KEY: ${ANTHROPIC_API_KEY}
+      DEFAULT_MODELS: claude-sonnet-4-6
+      WEBUI_SECRET_KEY: ${HERMES_DASH_SECRET_KEY}
+      SCARF_NO_ANALYTICS: "true"
+      DO_NOT_TRACK: "true"
+    volumes:
+      - hermes_dash_data:/app/backend/data
+    ports:
+      - "8081:8080"
+    networks:
+      - openorg
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hermes-dash.rule=Host(`hermes-dash.srv1427612.hstgr.cloud`)"
+      - "traefik.http.routers.hermes-dash.entrypoints=websecure"
+      - "traefik.http.routers.hermes-dash.tls.certresolver=letsencrypt"
+      - "traefik.http.services.hermes-dash.loadbalancer.server.port=8080"
+
+volumes:
+  hermes_data:
+  hermes_dash_data:
+
+networks:
+  openorg:
+    external: true
+    name: openorg

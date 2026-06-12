@@ -1,0 +1,31 @@
+{
+  "id": "lisa-cmo",
+  "name": "Lisa",
+  "description": "Chief Marketing Officer — Andrea's agent. Drives brand, positioning, campaigns, and external comms for OpenOrg.",
+  "model": "claude-sonnet-4-6",
+  "system_prompt_file": "system-prompt.md",
+  "capabilities": {
+    "memory": true,
+    "web_search": false,
+    "code_execution": false,
+    "image_generation": false
+  },
+  "skills": [
+    "humanizer",
+    "composio",
+    "claudeception",
+    "persistent-memory"
+  ],
+  "params": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 4096
+  },
+  "meta": {
+    "owner": "Andrea",
+    "owner_id": "andrea",
+    "role": "CMO",
+    "agent_url": "https://hermes.srv1427612.hstgr.cloud",
+    "created": "2026-06-12"
+  }
+}

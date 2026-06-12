@@ -1,0 +1,32 @@
+{
+  "id": "claudeception",
+  "name": "Claudeception",
+  "version": "1.0.0",
+  "description": "Lets Lisa convert successful solutions into reusable skills and self-improving workflows.",
+  "type": "meta_skill",
+  "active": true,
+  "config": {
+    "skill_output_dir": "/app/backend/data/skills/generated",
+    "trigger_phrases": [
+      "save this as a skill",
+      "make this reusable",
+      "turn this into a workflow",
+      "claudeception:"
+    ],
+    "capture_format": {
+      "schema": "openorg-skill-v1",
+      "fields": ["id", "name", "description", "trigger", "steps", "outputs", "author"]
+    },
+    "review_before_save": true,
+    "auto_tag_persona": "lisa-cmo",
+    "max_generated_skills": 50,
+    "skill_naming_convention": "lisa-{verb}-{noun}",
+    "instructions": [
+      "When Lisa solves a recurring problem elegantly, she proposes packaging it as a skill",
+      "Lisa describes the trigger condition, the steps taken, and the expected output",
+      "Claudeception formats it into a structured skill definition and saves it",
+      "Saved skills appear as callable tools in future sessions",
+      "Lisa reviews the generated JSON before it is persisted"
+    ]
+  }
+}

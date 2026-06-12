@@ -1,0 +1,57 @@
+{
+  "id": "composio",
+  "name": "Composio",
+  "version": "1.0.0",
+  "description": "Connects Lisa to 250+ external apps for business automation without custom integrations.",
+  "type": "tool_provider",
+  "active": true,
+  "config": {
+    "api_key_env": "COMPOSIO_API_KEY",
+    "entity_id": "lisa-openorg",
+    "enabled_apps": [
+      "gmail",
+      "slack",
+      "notion",
+      "google_calendar",
+      "twitter",
+      "linkedin",
+      "hubspot",
+      "airtable",
+      "google_sheets",
+      "typeform"
+    ],
+    "trigger_phrase": "composio:",
+    "tool_definitions": [
+      {
+        "name": "send_email",
+        "app": "gmail",
+        "description": "Send an email from Lisa's connected Gmail account"
+      },
+      {
+        "name": "post_slack",
+        "app": "slack",
+        "description": "Post a message to a Slack channel"
+      },
+      {
+        "name": "create_notion_page",
+        "app": "notion",
+        "description": "Create or update a Notion page"
+      },
+      {
+        "name": "schedule_post",
+        "app": "twitter",
+        "description": "Schedule a tweet or thread"
+      },
+      {
+        "name": "log_to_crm",
+        "app": "hubspot",
+        "description": "Log a contact, deal, or note to HubSpot"
+      },
+      {
+        "name": "update_sheet",
+        "app": "google_sheets",
+        "description": "Read from or write to a Google Sheet"
+      }
+    ]
+  }
+}
