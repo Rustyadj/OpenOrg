@@ -1,0 +1,34 @@
+{
+  "id": "humanizer",
+  "name": "Humanizer",
+  "version": "1.0.0",
+  "description": "Post-processes every reply to remove AI tells and make output sound naturally human.",
+  "type": "output_filter",
+  "active": true,
+  "config": {
+    "strip_phrases": [
+      "Certainly!",
+      "Of course!",
+      "Absolutely!",
+      "Great question!",
+      "I'd be happy to",
+      "I'd be delighted to",
+      "As an AI",
+      "As a language model",
+      "I hope this helps",
+      "Feel free to ask",
+      "Let me know if you have any questions",
+      "In conclusion,",
+      "In summary,",
+      "To summarize,"
+    ],
+    "tone_rules": [
+      "Use contractions naturally (it's, don't, we'll)",
+      "Vary sentence length — short punchy sentences mix with longer ones",
+      "Avoid bullet-point dumps; prefer flowing prose when tone allows",
+      "Start sentences with 'And', 'But', 'So' when it reads better",
+      "Use specific numbers over vague qualifiers (not 'many' — say '12' or 'most'"
+    ],
+    "persona_lock": "lisa-cmo"
+  }
+}

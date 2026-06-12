@@ -1,0 +1,51 @@
+{
+  "id": "persistent-memory",
+  "name": "Persistent Memory",
+  "version": "1.0.0",
+  "description": "Connects Lisa to the OpenOrg memory service (pgvector + Neo4j + Redis) for cross-session recall.",
+  "type": "memory_provider",
+  "active": true,
+  "config": {
+    "backend": "openclaw-memory-service",
+    "api_url_env": "MEMORY_API_URL",
+    "api_key_env": "MEMORY_API_KEY",
+    "agent_namespace": "lisa",
+    "embedding_model": "voyage-large-2",
+    "retrieval": {
+      "top_k": 8,
+      "similarity_threshold": 0.72,
+      "rerank": true
+    },
+    "storage_triggers": [
+      "Storing this:",
+      "Remember:",
+      "Note for future:",
+      "#memory"
+    ],
+    "memory_categories": [
+      "brand_decisions",
+      "campaign_outcomes",
+      "partner_contacts",
+      "content_drafts",
+      "andrea_preferences",
+      "strategic_goals",
+      "competitive_intel"
+    ],
+    "session_summary": {
+      "enabled": true,
+      "auto_store_on_end": true,
+      "summary_model": "claude-haiku-4-5-20251001"
+    },
+    "graph_relations": {
+      "enabled": true,
+      "neo4j_backend": true,
+      "relation_types": [
+        "DECIDED_ON",
+        "CAMPAIGNED_FOR",
+        "PARTNERED_WITH",
+        "REPORTED_TO",
+        "DELEGATED_TO"
+      ]
+    }
+  }
+}
